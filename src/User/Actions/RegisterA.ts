@@ -4,7 +4,7 @@ import { User } from '../User';
 import { registerByLoginAndPassREQ } from '../UserR';
 
 /**
- * События для доставки заказа НЕ своего
+ * Регистрация пользователя в системе
  */
 export class RegisterA extends BaseActions {
 
@@ -55,7 +55,7 @@ export class RegisterA extends BaseActions {
             }
 
             if (!this.object.errorSys.isOk()) {
-                throw 'error input';
+                throw 'errorInput';
             }
 
             if (data.login.length < 5) {
@@ -71,7 +71,7 @@ export class RegisterA extends BaseActions {
             }
 
             if (!this.object.errorSys.isOk()) {
-                throw 'error validate';
+                throw 'errorValidate';
             }
 
             /* использован ли такой логин */
@@ -80,14 +80,12 @@ export class RegisterA extends BaseActions {
                 this.object.errorSys.error(this.className() + '.registerByLoginAndPass', 'loginAlreadyUsed');
             }
 
-            if (!this.object.errorSys.isOk()) {
-                throw 'error loginAlreadyUsed';
+            if (this.object.errorSys.isOk()) {
+                res = await this.object.listDB.userDB.registerByLoginAndPass(data.login, data.pass);
             }
 
-            res = await this.object.listDB.userDB.registerByLoginAndPass(data.login, data.pass);
-
         } catch (e) {
-            this.object.errorSys.error('someEror', String(e));
+            this.object.errorSys.error(this.className() + '.registerByLoginAndPass', String(e));
         }
 
         return res;

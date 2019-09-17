@@ -21,7 +21,7 @@ export class UpdateA extends BaseActions {
                 if (!this.object.is()) {
                     this.object.errorSys.error(this.className() + '.update', 'objectIsEmpty')
                     throw 'objectIsEmpty';
-                } 
+                }
 
                 /* созраняем userId */
                 let userId = this.object.data.id;
