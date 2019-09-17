@@ -1,0 +1,31 @@
+{
+  "name": "@a-a-game-studio/aa-classes",
+  "version": "1.0.0",
+  "description": "ts classes for backend and frontend",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
+  "scripts": {
+    "release": "npm run build:dev && npm run build:prod",
+    "build": "tsc",
+    "test": "./node_modules/.bin/ts-mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-a-game-studio/aa-classes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/a-a-game-studio/aa-classes.git/issues"
+  },
+  "author": "a-a-game-studio",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "@a-a-game-studio/aa-components": "^1.0.14",
+    "@types/node": "^12.7.2",
+    "mocha": "^6.2.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "directories": {
+    "lib": "lib"
+  }
+}
