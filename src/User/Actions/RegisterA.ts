@@ -45,38 +45,43 @@ export class RegisterA extends BaseActions {
         const errorString = this.className() + '.registerByLoginAndPass';
         try {
 
-            new FieldValidator(this.object.errorSys, data.login)
+            /* Валидация полей */
+            let cValidator = new FieldValidator(this.object.errorSys, data.login)
+
+                /* Проверякм login */
                 .fSetErrorString(errorString + '.login')
                 .fExist()
                 .fText()
-                .fMinLen(5);
+                .fMinLen(5)
 
-            new FieldValidator(this.object.errorSys, data.pass)
+                /* проверяем пароль */
+                .fSetData(data.pass)
                 .fSetErrorString(errorString + '.pass')
                 .fExist()
                 .fText()
-                .fMinLen(7);
+                .fMinLen(7)
 
-            new FieldValidator(this.object.errorSys, data.passConfirm)
+                /* проверяем подтверждение пароля */
+                .fSetData(data.passConfirm)
                 .fSetErrorString(errorString + '.passConfirm')
                 .fExist()
                 .fText()
                 .fEqual(data.pass)
                 .fMinLen(7);
 
-
-            if (!this.object.errorSys.isOk()) {
-                throw 'errorValidate';
+            if (cValidator.fIsOk()) {
+                cValidator
+                    .fSetData(await this.object.listDB.userDB.getInfoByLogin(data.login))
+                    .fSetErrorString(errorString + '.loginAlreadyUsed')
+                    .fNotExist()
             }
 
-            /* использован ли такой логин */
-            let existUser = await this.object.listDB.userDB.getInfoByLogin(data.login);
-            if (existUser) {
-                this.object.errorSys.error(errorString, 'loginAlreadyUsed');
-                throw 'loginAlreadyUsed';
-            }
-
-            res = await this.object.listDB.userDB.registerByLoginAndPass(data.login, data.pass);
+            res = await cValidator.fDoIfOkAsync(
+                /* регистрируем пользователя если все OK */
+                this.object.listDB.userDB.registerByLoginAndPass,
+                [data.login, data.pass]
+            );
+            
 
         } catch (e) {
             this.object.errorSys.error(errorString, String(e));
