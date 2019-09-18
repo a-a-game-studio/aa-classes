@@ -2,7 +2,7 @@ import { UserI } from '../UserDB/UserE';
 import { BaseActions } from "../../BaseClass/BaseActions";
 import { User } from '../User';
 import { registerByLoginAndPassREQ } from '../UserR';
-
+import { FieldValidator } from "@a-a-game-studio/aa-components/lib";
 /**
  * Регистрация пользователя в системе
  */
@@ -42,33 +42,28 @@ export class RegisterA extends BaseActions {
      */
     public async registerByLoginAndPass(data: registerByLoginAndPassREQ): Promise<string> {
         let res = '';
-
+        const errorString = this.className() + '.registerByLoginAndPass';
         try {
-            if (!data.login) {
-                this.object.errorSys.error(this.className() + '.registerByLoginAndPass', 'emptyLogin');
-            }
-            if (!data.pass) {
-                this.object.errorSys.error(this.className() + '.registerByLoginAndPass', 'emptypass');
-            }
-            if (!data.passConfirm) {
-                this.object.errorSys.error(this.className() + '.registerByLoginAndPass', 'emptypassConfirm');
-            }
 
-            if (!this.object.errorSys.isOk()) {
-                throw 'errorInput';
-            }
+            new FieldValidator(this.object.errorSys, data.login)
+                .fSetErrorString(errorString + '.login')
+                .fExist()
+                .fText()
+                .fMinLen(5);
 
-            if (data.login.length < 5) {
-                this.object.errorSys.error(this.className() + '.registerByLoginAndPass', 'loginToShort');
-            }
+            new FieldValidator(this.object.errorSys, data.pass)
+                .fSetErrorString(errorString + '.pass')
+                .fExist()
+                .fText()
+                .fMinLen(7);
 
-            if (data.pass.length < 7) {
-                this.object.errorSys.error(this.className() + '.registerByLoginAndPass', 'passToShort');
-            }
+            new FieldValidator(this.object.errorSys, data.passConfirm)
+                .fSetErrorString(errorString + '.passConfirm')
+                .fExist()
+                .fText()
+                .fEqual(data.pass)
+                .fMinLen(7);
 
-            if (data.passConfirm != data.pass) {
-                this.object.errorSys.error(this.className() + '.registerByLoginAndPass', 'passConfirm');
-            }
 
             if (!this.object.errorSys.isOk()) {
                 throw 'errorValidate';
@@ -77,15 +72,14 @@ export class RegisterA extends BaseActions {
             /* использован ли такой логин */
             let existUser = await this.object.listDB.userDB.getInfoByLogin(data.login);
             if (existUser) {
-                this.object.errorSys.error(this.className() + '.registerByLoginAndPass', 'loginAlreadyUsed');
+                this.object.errorSys.error(errorString, 'loginAlreadyUsed');
+                throw 'loginAlreadyUsed';
             }
 
-            if (this.object.errorSys.isOk()) {
-                res = await this.object.listDB.userDB.registerByLoginAndPass(data.login, data.pass);
-            }
+            res = await this.object.listDB.userDB.registerByLoginAndPass(data.login, data.pass);
 
         } catch (e) {
-            this.object.errorSys.error(this.className() + '.registerByLoginAndPass', String(e));
+            this.object.errorSys.error(errorString, String(e));
         }
 
         return res;
