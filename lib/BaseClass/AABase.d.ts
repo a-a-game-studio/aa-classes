@@ -9,7 +9,7 @@ export declare class AABase {
     errorSys: ErrorSys;
     constructor(errorSys: ErrorSys, listDB: ListDB);
     is(): boolean;
-    protected className(): string;
+    protected fClassName(): string;
     sync(id: number): Promise<AABase>;
     sysGetProperties(): any;
     sysCopyInterface(cInterface: any, cClass: any): any;

@@ -15,7 +15,7 @@ export class UpdateA extends BaseActions {
      * Обновить польователя по id
      */
     public async faUpdate(data: UserI): Promise<boolean> {
-        const errorString = this.className() + '.' + this.methodName();
+        const errorString = this.fClassName() + '.' + this.fMethodName();
 
         /* проверяем существование пользователя */
         let fv = new FieldValidator(this.object.errorSys, this.object.is())
@@ -38,7 +38,7 @@ export class UpdateA extends BaseActions {
 
             /* если обновились пересчитываем их */
             this.object.data = await this.object.listDB.userDB.faGetInfoById(this.object.data.id);
-            
+
         });
 
         return this.object.errorSys.isOk();

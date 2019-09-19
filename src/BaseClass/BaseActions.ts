@@ -8,11 +8,11 @@ export class BaseActions {
     protected object: AABase; // текущий объект
 
 
-    protected className() {
+    protected fClassName() {
         return this.constructor.name;
     }
 
-    protected methodName(): string {
+    protected fMethodName(): string {
         var err = new Error();
         return /at \w+\.(\w+)/.exec(err.stack.split('\n')[2])[1] // we want the 2nd method in the call stack
     }

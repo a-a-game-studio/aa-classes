@@ -19,7 +19,7 @@ export class MyWalletA extends BaseActions {
      */
     public async faGetBalance(): Promise<number> {
         let resp: number;
-        const errorString = this.className() + '.' + this.methodName();
+        const errorString = this.fClassName() + '.' + this.fMethodName();
         const wallet = new Wallet(this.object.errorSys, this.object.listDB);
 
         /* проверяем существование пользователя */
@@ -43,7 +43,7 @@ export class MyWalletA extends BaseActions {
     public async faGetWalletList(arg: SimpleI.listArg): Promise<Wallet[]> {
         let resp: Wallet[];
 
-        const errorString = this.className() + '.' + this.methodName();
+        const errorString = this.fClassName() + '.' + this.fMethodName();
         const wallet = new Wallet(this.object.errorSys, this.object.listDB);
 
         /* проверяем существование пользователя */
@@ -73,7 +73,7 @@ export class MyWalletA extends BaseActions {
 
         let resp = 0;
 
-        const errorString = this.className() + '.' + this.methodName();
+        const errorString = this.fClassName() + '.' + this.fMethodName();
         const wallet = new Wallet(this.object.errorSys, this.object.listDB);
 
         /* проверяем существование пользователя */

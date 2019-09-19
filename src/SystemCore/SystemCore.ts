@@ -21,7 +21,7 @@ export class SystemCore extends AABase {
 
         /* исполнитель обящателен */
         if (!this.user.is()) {
-            this.errorSys.error(this.className() + '.constructor', 'EmptyUser');
+            this.errorSys.error(this.fClassName() + '.constructor', 'EmptyUser');
         }
     }
 

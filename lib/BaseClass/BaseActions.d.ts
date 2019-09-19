@@ -1,6 +1,6 @@
 import { AABase } from './AABase';
 export declare class BaseActions {
     protected object: AABase;
-    protected className(): string;
+    protected fClassName(): string;
     constructor(object: AABase);
 }

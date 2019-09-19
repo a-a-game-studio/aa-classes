@@ -28,7 +28,7 @@ export class UserDB extends BaseDB {
      */
     public async faGetInfoById(userId: number): Promise<UserI> {
         let res: UserI;
-        this.errorSys.error(this.className() + '.' + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + '.' + this.fMethodName(), 'abstract method');
         return res;
     }
 
@@ -38,7 +38,7 @@ export class UserDB extends BaseDB {
      */
     public async faGetInfoByLogin(sLogin: string): Promise<UserI> {
         let res: UserI;
-        this.errorSys.error(this.className() + '.' + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + '.' + this.fMethodName(), 'abstract method');
         return res;
     }
 
@@ -49,7 +49,7 @@ export class UserDB extends BaseDB {
      */
     public async faGetUserInfoByToken(sToken: string): Promise<UserI> {
         let res: UserI;
-        this.errorSys.error(this.className() + '.' + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + '.' + this.fMethodName(), 'abstract method');
         return res;
     }
 
@@ -59,7 +59,7 @@ export class UserDB extends BaseDB {
      */
     public async faGetUserList(arg: SimpleI.listArg): Promise<UserI[]> {
         let res: UserI[] = [];
-        this.errorSys.error(this.className() + '.' + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + '.' + this.fMethodName(), 'abstract method');
         return res;
     }
 
@@ -69,7 +69,7 @@ export class UserDB extends BaseDB {
      */
     public async faInsert(data: UserI): Promise<UserI> {
         let resp: UserI;
-        this.errorSys.error(this.className() + '.' + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + '.' + this.fMethodName(), 'abstract method');
         return resp;
     }
 
@@ -79,7 +79,7 @@ export class UserDB extends BaseDB {
      */
     public async faUpdate(data: UserI): Promise<boolean> {
         let resp: UserI;
-        this.errorSys.error(this.className() + '.' + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + '.' + this.fMethodName(), 'abstract method');
         return this.errorSys.isOk();
     }
 
@@ -88,7 +88,7 @@ export class UserDB extends BaseDB {
      * @param data: UserI 
      */
     public async faRemove(data: UserI): Promise<boolean> {
-        this.errorSys.error(this.className() + '.' + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + '.' + this.fMethodName(), 'abstract method');
         return this.errorSys.isOk();
     }
 
@@ -101,7 +101,7 @@ export class UserDB extends BaseDB {
     */
     public async faRegisterByLoginAndPass(sLogin: string, sPass: string): Promise<string> {
         let res = '';
-        this.errorSys.error(this.className() + '.' + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + '.' + this.fMethodName(), 'abstract method');
         return res;
     }
 
@@ -114,7 +114,7 @@ export class UserDB extends BaseDB {
      */
     public async faGetTokenByLoginAndPass(sLogin: string, sPass: string): Promise<string> {
         let res = '';
-        this.errorSys.error(this.className() + this.methodName(), 'abstract method');
+        this.errorSys.error(this.fClassName() + this.fMethodName(), 'abstract method');
         return res;
     }
 

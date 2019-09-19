@@ -42,7 +42,7 @@ export class RegisterA extends BaseActions {
      */
     public async faRegisterByLoginAndPass(data: registerByLoginAndPassREQ): Promise<string> {
         let res = '';
-        const errorString = this.className() + '.' + this.methodName();
+        const errorString = this.fClassName() + '.' + this.fMethodName();
 
         /* Валидация полей */
         let fv = new FieldValidator(this.object.errorSys, data.login)

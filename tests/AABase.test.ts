@@ -12,14 +12,14 @@ class TestClass extends AABase {
      * getClassName
      */
     public getClassName() {
-        return this.className();
+        return this.fClassName();
     }
 
     /**
      * getMethodName
      */
     public getMethodName() {
-        return this.methodName();
+        return this.fMethodName();
     }
 }
 
@@ -28,7 +28,7 @@ function run() {
     /* описание теста */
     mocha.describe('Test AABase', () => {
 
-        mocha.it('className', () => {
+        mocha.it('fClassName', () => {
             const errorSys = new ErrorSys();
             let listDB: ListDB;
             const tc = new TestClass(errorSys, listDB);
