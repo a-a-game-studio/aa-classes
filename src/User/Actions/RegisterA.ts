@@ -72,7 +72,7 @@ export class RegisterA extends BaseActions {
 
         /* проверяем на существование пользователя */
         let user = await fv.faDoIfOkAsync(
-            async () => await this.object.listDB.userDB.getInfoByLogin(data.login)
+            async () => await this.object.listDB.userDB.faGetInfoByLogin(data.login)
         );
         fv.fSetData(user)
             .fSetErrorString(errorString + '.loginAlreadyUsed')
@@ -81,7 +81,7 @@ export class RegisterA extends BaseActions {
         /* регистрируем пользователя если все OK */
         fv.fSetErrorString('regDB');
         res = await fv.faDoIfOkAsync(
-            async () => await this.object.listDB.userDB.registerByLoginAndPass(data.login, data.pass)
+            async () => await this.object.listDB.userDB.faRegisterByLoginAndPass(data.login, data.pass)
         );
 
         return res;

@@ -24,7 +24,7 @@ export class Wallet extends AABase {
         this.data = {
             id: 0,
             user_id: 0, // Владелец
-            date: null, // дата щаписи
+            date: null, // дата
         
             type: null, // тип записи
             amount: 0, // колличество денег

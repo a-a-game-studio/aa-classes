@@ -13,9 +13,9 @@ export class InfoA extends BaseActions {
      * Получить юзера по ID
      * @param userId 
      */
-    public async getInfoById(userId: number): Promise<boolean> {
+    public async faGetInfoById(userId: number): Promise<boolean> {
         if (this.object.errorSys.isOk()) {
-            this.object.data = await this.object.listDB.userDB.getInfoById(userId);
+            this.object.data = await this.object.listDB.userDB.faGetInfoById(userId);
         }
         return this.object.errorSys.isOk();
     }
@@ -24,13 +24,9 @@ export class InfoA extends BaseActions {
      * Получить юзера по токену
      * @param token 
      */
-    public async getInfoByToken(token: string): Promise<boolean> {
+    public async faGetUserInfoByToken(token: string): Promise<boolean> {
 
-        try {
-            this.object.data = await this.object.listDB.userDB.getUserInfoByToken(token);
-        } catch (e) {
-            this.object.errorSys.error(this.className() + 'getInfoByToken', e);
-        }
+        this.object.data = await this.object.listDB.userDB.faGetUserInfoByToken(token);
 
         if (this.object.is()) {
             this.object.data.token = token;

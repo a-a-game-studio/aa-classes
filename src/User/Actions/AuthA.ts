@@ -23,7 +23,7 @@ export class AuthA extends BaseActions {
     */
   public async login(data: LoginI): Promise<string> {
     let res: string = '';
-    res = await this.object.listDB.userDB.getTokenByLoginAndPass(data.login, data.pass);
+    res = await this.object.listDB.userDB.faGetTokenByLoginAndPass(data.login, data.pass);
     if (!res) {
       this.object.errorSys.error('cantLogin', 'cantLogin')
     }
