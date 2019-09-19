@@ -13,7 +13,7 @@ export class UpdateA extends BaseActions {
     /**
      * Обновить польователя по id
      */
-    public async update(data: UserI): Promise<boolean> {
+    public async faUpdate(data: UserI): Promise<boolean> {
         if (this.object.errorSys.isOk()) {
 
             try {

@@ -16,7 +16,7 @@ export class RegisterA extends BaseActions {
      * Регистрация
      * @param userI 
      */
-    public async registerStart(userI: UserI): Promise<boolean> {
+    public async faRegisterStart(userI: UserI): Promise<boolean> {
         let res = false;
         return res;
     }
@@ -26,7 +26,7 @@ export class RegisterA extends BaseActions {
      * Подтверждение регистрации
      * @param userI 
      */
-    public async registerCommit(userI: UserI): Promise<boolean> {
+    public async faRegisterCommit(userI: UserI): Promise<boolean> {
         let res = false;
         return res;
     }
@@ -40,52 +40,46 @@ export class RegisterA extends BaseActions {
      * 
      * @returns token: string
      */
-    public async registerByLoginAndPass(data: registerByLoginAndPassREQ): Promise<string> {
+    public async faRegisterByLoginAndPass(data: registerByLoginAndPassREQ): Promise<string> {
         let res = '';
-        const errorString = this.className() + '.registerByLoginAndPass';
-        try {
+        const errorString = this.className() + '.' + this.methodName();
 
-            /* Валидация полей */
-            let cValidator = new FieldValidator(this.object.errorSys, data.login)
+        /* Валидация полей */
+        let cV = new FieldValidator(this.object.errorSys, data.login)
 
-                /* Проверякм login */
-                .fSetErrorString(errorString + '.login')
-                .fExist()
-                .fText()
-                .fMinLen(5)
+            /* Проверякм login */
+            .fSetErrorString(errorString + '.login')
+            .fExist()
+            .fText()
+            .fMinLen(5)
 
-                /* проверяем пароль */
-                .fSetData(data.pass)
-                .fSetErrorString(errorString + '.pass')
-                .fExist()
-                .fText()
-                .fMinLen(7)
+            /* проверяем пароль */
+            .fSetData(data.pass)
+            .fSetErrorString(errorString + '.pass')
+            .fExist()
+            .fText()
+            .fMinLen(7)
 
-                /* проверяем подтверждение пароля */
-                .fSetData(data.passConfirm)
-                .fSetErrorString(errorString + '.passConfirm')
-                .fExist()
-                .fText()
-                .fEqual(data.pass)
-                .fMinLen(7);
+            /* проверяем подтверждение пароля */
+            .fSetData(data.passConfirm)
+            .fSetErrorString(errorString + '.passConfirm')
+            .fExist()
+            .fText()
+            .fEqual(data.pass)
+            .fMinLen(7);
 
-            if (cValidator.fIsOk()) {
-                cValidator
-                    .fSetData(await this.object.listDB.userDB.getInfoByLogin(data.login))
-                    .fSetErrorString(errorString + '.loginAlreadyUsed')
-                    .fNotExist()
-            }
+        /* проверяем на существование пользователя */
+        let user = await cV.faDoIfOkAsync(
+            async () => await this.object.listDB.userDB.getInfoByLogin(data.login)
+        );
+        cV.fSetData(user)
+            .fSetErrorString(errorString + '.loginAlreadyUsed')
+            .fNotExist();
 
-            res = await cValidator.fDoIfOkAsync(
-                /* регистрируем пользователя если все OK */
-                this.object.listDB.userDB.registerByLoginAndPass,
-                [data.login, data.pass]
-            );
-            
-
-        } catch (e) {
-            this.object.errorSys.error(errorString, String(e));
-        }
+        /* регистрируем пользователя если все OK */
+        res = await cV.faDoIfOkAsync(
+            async () => await this.object.listDB.userDB.registerByLoginAndPass(data.login, data.pass)
+        );
 
         return res;
     }

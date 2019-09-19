@@ -4,6 +4,7 @@ import { SimpleI } from "@a-a-game-studio/aa-components/lib";
 import { Wallet } from "../../Wallet/Wallet";
 import { ListWalletArg } from "../../Wallet/Actions/WalletListA";
 import { WalletI } from "../../Wallet/WalletDB/WalletE";
+import { FieldValidator } from "@a-a-game-studio/aa-components/lib";
 
 /**
  * Кошелек юзера
@@ -15,23 +16,19 @@ export class MyWalletA extends BaseActions {
     /**
      * Текущий баланс
      */
-    public async getBalance(): Promise<number> {
+    public async faGetBalance(): Promise<number> {
         let resp: number;
+        const errorString = this.className() + '.' + this.methodName();
 
-        try {
+        const wallet = new Wallet(this.object.errorSys, this.object.listDB);
 
-            if (!this.object.is()) {
-                this.object.errorSys.error(this.className() + '.getBalance.', 'EmptyUser');
-                throw 'EmptyUser';
-            }
+        let cV = new FieldValidator(this.object.errorSys, this.object.is())
+            .fSetErrorString(errorString + '.checkUser')
+            .fTrue('EmptyUser');
 
-            let wallet = new Wallet(this.object.errorSys, this.object.listDB);
-            resp = await wallet.actions.walletInfoA.getBalance(this.object.data.id);
-
-
-        } catch (e) {
-            this.object.errorSys.error(this.className() + '.getBalance', String(e));
-        }
+        resp = await cV.faDoIfOkAsync(async () =>
+            await wallet.actions.walletInfoA.getBalance(this.object.data.id)
+        );
 
         return resp;
     }
@@ -74,7 +71,7 @@ export class MyWalletA extends BaseActions {
                 throw 'EmptyUser';
             }
 
-            if(data.amount == 0) {
+            if (data.amount == 0) {
                 this.object.errorSys.error(this.className() + '.insert.', 'AmountIsNull');
                 throw 'AmountIsNull';
             }

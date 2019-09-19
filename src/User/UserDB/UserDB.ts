@@ -1,4 +1,4 @@
-import { BaseDB } from"../../BaseClass/BaseDB";
+import { BaseDB } from "../../BaseClass/BaseDB";
 import { UserI, UserE } from "./UserE";
 import { UserTokenE } from "./UserTokenE";
 import { ErrorSys, SimpleI } from "@a-a-game-studio/aa-components/lib";
@@ -28,7 +28,7 @@ export class UserDB extends BaseDB {
      */
     public async getInfoById(userId: number): Promise<UserI> {
         let res: UserI;
-        this.errorSys.error(this.className+'.getInfoById', 'abstract method');
+        this.errorSys.error(this.className() + '.getInfoById', 'abstract method');
         return res;
     }
 
@@ -38,7 +38,7 @@ export class UserDB extends BaseDB {
      */
     public async getInfoByLogin(login: string): Promise<UserI> {
         let res: UserI;
-        this.errorSys.error(this.className+'.getInfoByLogin', 'abstract method');
+        this.errorSys.error(this.className() + '.getInfoByLogin', 'abstract method');
         return res;
     }
 
@@ -49,7 +49,7 @@ export class UserDB extends BaseDB {
      */
     public async getUserInfoByToken(token: string): Promise<UserI> {
         let res: UserI;
-        this.errorSys.error(this.className+'.getUserInfoByToken', 'abstract method');
+        this.errorSys.error(this.className() + '.getUserInfoByToken', 'abstract method');
         return res;
     }
 
@@ -59,7 +59,7 @@ export class UserDB extends BaseDB {
      */
     public async getUserList(arg: SimpleI.listArg): Promise<UserI[]> {
         let res: UserI[] = [];
-        this.errorSys.error(this.className+'.getUserList', 'abstract method');
+        this.errorSys.error(this.className() + '.getUserList', 'abstract method');
         return res;
     }
 
@@ -69,7 +69,7 @@ export class UserDB extends BaseDB {
      */
     public async insert(data: UserI): Promise<UserI> {
         let resp: UserI;
-        this.errorSys.error(this.className+'.insert', 'abstract method');
+        this.errorSys.error(this.className() + '.insert', 'abstract method');
         return resp;
     }
 
@@ -79,7 +79,7 @@ export class UserDB extends BaseDB {
      */
     public async update(data: UserI): Promise<boolean> {
         let resp: UserI;
-        this.errorSys.error(this.className+'.update', 'abstract method');
+        this.errorSys.error(this.className() + '.update', 'abstract method');
         return this.errorSys.isOk();
     }
 
@@ -88,7 +88,7 @@ export class UserDB extends BaseDB {
      * @param data 
      */
     public async remove(data: UserI): Promise<boolean> {
-        this.errorSys.error(this.className+'.remove', 'abstract method');
+        this.errorSys.error(this.className() + '.remove', 'abstract method');
         return this.errorSys.isOk();
     }
 
@@ -102,11 +102,11 @@ export class UserDB extends BaseDB {
     */
     public async registerByLoginAndPass(login: string, pass: string): Promise<string> {
         let res = '';
-        this.errorSys.error(this.className+'.registerByLoginAndPass', 'abstract method');
+        this.errorSys.error(this.className() + '.registerByLoginAndPass', 'abstract method');
         return res;
     }
 
-    
+
     /**
      * Выбает токен по логину и паролю
      * @param login 
@@ -115,7 +115,7 @@ export class UserDB extends BaseDB {
      */
     public async getTokenByLoginAndPass(login: string, pass: string): Promise<string> {
         let res = '';
-        this.errorSys.error(this.className+'.getTokenByLoginAndPass', 'abstract method');
+        this.errorSys.error(this.className() + '.getTokenByLoginAndPass', 'abstract method');
         return res;
     }
 
