@@ -70,26 +70,4 @@ export class User extends AABase {
         return object;
     }
 
-    /**
-     * Список объектов
-     */
-    public async list(arg: SimpleI.listArg): Promise<User[]> {
-
-        let res: User[] = [];
-
-        if (this.errorSys.isOk()) {
-            let list = await this.listDB.userDB.getUserList(arg);
-
-            for (let i = 0; i < list.length; i++) {
-                let errorSys = new ErrorSys;
-                res.push(await User.Init(errorSys, list[i], this.listDB));
-            }
-
-        }
-
-        return res;
-    }
-
-
-
 }
