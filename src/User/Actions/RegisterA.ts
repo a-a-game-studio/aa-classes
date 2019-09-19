@@ -45,7 +45,7 @@ export class RegisterA extends BaseActions {
         const errorString = this.className() + '.' + this.methodName();
 
         /* Валидация полей */
-        let cV = new FieldValidator(this.object.errorSys, data.login)
+        let fv = new FieldValidator(this.object.errorSys, data.login)
 
             /* Проверякм login */
             .fSetErrorString(errorString + '.login')
@@ -66,18 +66,21 @@ export class RegisterA extends BaseActions {
             .fExist()
             .fText()
             .fEqual(data.pass)
-            .fMinLen(7);
+            .fMinLen(7)
+            
+            .fSetErrorString('getInfoByLogin');
 
         /* проверяем на существование пользователя */
-        let user = await cV.faDoIfOkAsync(
+        let user = await fv.faDoIfOkAsync(
             async () => await this.object.listDB.userDB.getInfoByLogin(data.login)
         );
-        cV.fSetData(user)
+        fv.fSetData(user)
             .fSetErrorString(errorString + '.loginAlreadyUsed')
             .fNotExist();
 
         /* регистрируем пользователя если все OK */
-        res = await cV.faDoIfOkAsync(
+        fv.fSetErrorString('regDB');
+        res = await fv.faDoIfOkAsync(
             async () => await this.object.listDB.userDB.registerByLoginAndPass(data.login, data.pass)
         );
 

@@ -19,14 +19,14 @@ export class MyWalletA extends BaseActions {
     public async faGetBalance(): Promise<number> {
         let resp: number;
         const errorString = this.className() + '.' + this.methodName();
-
         const wallet = new Wallet(this.object.errorSys, this.object.listDB);
 
-        let cV = new FieldValidator(this.object.errorSys, this.object.is())
+        /* проверяем существование пользователя */
+        let fv = new FieldValidator(this.object.errorSys, this.object.is())
             .fSetErrorString(errorString + '.checkUser')
             .fTrue('EmptyUser');
 
-        resp = await cV.faDoIfOkAsync(async () =>
+        resp = await fv.faDoIfOkAsync(async () =>
             await wallet.actions.walletInfoA.getBalance(this.object.data.id)
         );
 
@@ -41,22 +41,23 @@ export class MyWalletA extends BaseActions {
     public async getWalletList(arg: SimpleI.listArg): Promise<Wallet[]> {
         let resp: Wallet[];
 
-        try {
+        const errorString = this.className() + '.' + this.methodName();
+        const wallet = new Wallet(this.object.errorSys, this.object.listDB);
 
-            if (!this.object.is()) {
-                this.object.errorSys.error(this.className() + '.getBalance.', 'EmptyUser');
-                throw 'EmptyUser';
-            }
+        /* проверяем существование пользователя */
+        let fv = new FieldValidator(this.object.errorSys, this.object.is())
+            .fSetErrorString(errorString + '.checkUser')
+            .fTrue('EmptyUser');
 
-            let wallet = new Wallet(this.object.errorSys, this.object.listDB);
-            let argT: ListWalletArg = arg;
-            argT.userId = this.object.data.id;
+        /* аргументы для списка */
+        let argT: ListWalletArg = arg;
+        argT.userId = this.object.data.id;
 
-            resp = await wallet.actions.walletListA.get(argT);
-
-        } catch (e) {
-            this.object.errorSys.error(this.className() + '.getBalance', String(e));
-        }
+        /* получаем список */
+        fv.fSetErrorString(errorString + '.getWallet');
+        resp = await fv.faDoIfOkAsync(async () =>
+            await wallet.actions.walletListA.get(argT)
+        );
 
         return resp;
     }
@@ -64,26 +65,26 @@ export class MyWalletA extends BaseActions {
     public async insert(data: WalletI): Promise<number> {
 
         let resp = 0;
-        try {
 
-            if (!this.object.is()) {
-                this.object.errorSys.error(this.className() + '.insert.', 'EmptyUser');
-                throw 'EmptyUser';
-            }
+        const errorString = this.className() + '.' + this.methodName();
+        const wallet = new Wallet(this.object.errorSys, this.object.listDB);
 
-            if (data.amount == 0) {
-                this.object.errorSys.error(this.className() + '.insert.', 'AmountIsNull');
-                throw 'AmountIsNull';
-            }
+        /* проверяем существование пользователя */
+        let fv = new FieldValidator(this.object.errorSys, this.object.is())
+            .fSetErrorString(errorString + '.checkUser')
+            .fTrue('EmptyUser')
 
+            .fSetData(data.amount)
+            .fSetErrorString(errorString + '.amount')
+            .fMore(0);
+
+
+        /* вставляем данные */
+        fv.fSetErrorString(errorString + '.insert');
+        resp = await fv.faDoIfOkAsync(async () => {
             data.user_id = this.object.data.id;
-
-            let wallet = new Wallet(this.object.errorSys, this.object.listDB);
-            resp = await wallet.actions.walletModifyA.insert(data);
-
-        } catch (e) {
-            this.object.errorSys.error(this.className() + '.getBalance', String(e));
-        }
+            return await wallet.actions.walletModifyA.insert(data);
+        });
 
         return resp;
 
