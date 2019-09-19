@@ -22,9 +22,9 @@ export class WalletDB extends BaseDB {
      * @param data 
      * return balance
      */
-    public async insert(data: WalletI): Promise<number> {
+    public async faInsert(data: WalletI): Promise<number> {
         let balance: number;
-        this.errorSys.error(this.className() + '.insert', 'abstract method');
+        this.errorSys.error(this.className() + this.methodName(), 'abstract method');
         return balance;
     }
 
@@ -32,9 +32,9 @@ export class WalletDB extends BaseDB {
      * Текущий баланс пользователя
      * @param userId 
      */
-    public async getBalance(userId: number): Promise<number> {
+    public async faGetBalance(userId: number): Promise<number> {
         let balance: number;
-        this.errorSys.error(this.className() + '.getBalance', 'abstract method');
+        this.errorSys.error(this.className() + this.methodName(), 'abstract method');
         return balance;
     }
 
@@ -44,9 +44,9 @@ export class WalletDB extends BaseDB {
      * @param userId 
      * @param arg 
      */
-    public async getUserWalletList(userId: number, arg: SimpleI.listArg): Promise<WalletI[]> {
+    public async faGetUserWalletList(userId: number, arg: SimpleI.listArg): Promise<WalletI[]> {
         let res: WalletI[] = [];
-        this.errorSys.error(this.className() + '.getUserWalletList', 'abstract method');
+        this.errorSys.error(this.className() + this.methodName(), 'abstract method');
         return res;
     }
 

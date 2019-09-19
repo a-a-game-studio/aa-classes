@@ -76,7 +76,7 @@ export class RegisterA extends BaseActions {
         );
         fv.fSetData(user)
             .fSetErrorString(errorString + '.loginAlreadyUsed')
-            .fNotExist();
+            .fNotExist(); // такого логина быть не должно в DB
 
         /* регистрируем пользователя если все OK */
         fv.fSetErrorString('regDB');

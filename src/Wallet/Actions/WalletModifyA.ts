@@ -14,18 +14,8 @@ export class WalletModifyA extends BaseActions {
      * возвращает остаток баланса
      * @param data 
      */
-    public async insert(data: WalletI): Promise<number> {
-
-        let resp: number;
-        try {
-
-            resp = await this.object.listDB.walletDB.insert(data);
-
-        } catch (e) {
-            this.object.errorSys.error(this.className() + '.insert', String(e));
-        }
-
-        return resp;
+    public async faInsert(data: WalletI): Promise<number> {
+        return await this.object.listDB.walletDB.faInsert(data);;
     }
 
 }

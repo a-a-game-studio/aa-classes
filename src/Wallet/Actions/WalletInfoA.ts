@@ -12,18 +12,8 @@ export class WalletInfoA extends BaseActions {
      * Получить текущий баланс пользователя
      * @param userId 
      */
-    public async getBalance(userId: number): Promise<number> {
-
-        let resp: number;
-        try {
-
-            resp = await this.object.listDB.walletDB.getBalance(userId);
-
-        } catch (e) {
-            this.object.errorSys.error(this.className() + '.getBalance', String(e));
-        }
-
-        return resp;
+    public async faGetBalance(userId: number): Promise<number> {
+        return await this.object.listDB.walletDB.faGetBalance(userId);;
     }
 
 }
