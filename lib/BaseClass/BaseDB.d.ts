@@ -4,4 +4,5 @@ export declare class BaseDB {
     modelValidatorSys: ModelValidatorSys;
     constructor(errorSys: ErrorSys);
     protected fClassName(): string;
+    protected fMethodName(): string;
 }

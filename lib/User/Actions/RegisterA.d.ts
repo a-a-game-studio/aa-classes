@@ -4,7 +4,7 @@ import { User } from '../User';
 import { registerByLoginAndPassREQ } from '../UserR';
 export declare class RegisterA extends BaseActions {
     object: User;
-    registerStart(userI: UserI): Promise<boolean>;
-    registerCommit(userI: UserI): Promise<boolean>;
-    registerByLoginAndPass(data: registerByLoginAndPassREQ): Promise<string>;
+    faRegisterStart(userI: UserI): Promise<boolean>;
+    faRegisterCommit(userI: UserI): Promise<boolean>;
+    faRegisterByLoginAndPass(data: registerByLoginAndPassREQ): Promise<string>;
 }

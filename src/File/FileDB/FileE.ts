@@ -3,13 +3,14 @@ import { Validator } from "@a-a-game-studio/aa-components/lib";
 
 export interface FileI extends AABaseDataI {
     id?:number; // Идентификатор
-	filename?: string; // Уникальное имя картинки
+	filename?: string; // Уникальное имя файла
 	size?: number; // Размер
-	source_url?: string // Исходный URL картинки
+	source_url?: string // Исходный URL файла
 	is_uploaded?: boolean; // Статус загружена ли картинка да|нет
-	uploaded_at?: string; //Время когда была загружена картинки
+	uploaded_at?: string; //Время когда была загружена файла
 	created_at?: string; //Время создания записи
-	updated_at?: string; // Время обновления записи
+    updated_at?: string; // Время обновления записи
+    fileData?: Buffer; // Данные файла
 }
 
 
@@ -35,7 +36,7 @@ export class FileE {
             .error(FileE.NAME+' - filename')
         );
 
-        // Исходный URL картинки
+        // Исходный URL файла
         rules.set(rules.rule('source_url')
             .type('text')
             .require()
@@ -67,7 +68,7 @@ export class FileE {
             .error(FileE.NAME+' - is_uploaded')
         );
 
-        // Размер исходной картинки
+        // Размер исходной файла
         rules.set(rules.rule('size')
             .type('int')
             .more(0)

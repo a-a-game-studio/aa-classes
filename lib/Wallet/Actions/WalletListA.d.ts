@@ -6,5 +6,5 @@ export interface ListWalletArg extends SimpleI.listArg {
 }
 export declare class WalletListA extends BaseActions {
     object: Wallet;
-    get(arg: ListWalletArg): Promise<Wallet[]>;
+    faGet(arg: ListWalletArg): Promise<Wallet[]>;
 }

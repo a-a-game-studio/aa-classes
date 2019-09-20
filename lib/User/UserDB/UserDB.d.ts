@@ -6,13 +6,13 @@ export declare class UserDB extends BaseDB {
     userE: UserE;
     userTokenE: UserTokenE;
     constructor(errorSys: ErrorSys);
-    getInfoById(userId: number): Promise<UserI>;
-    getInfoByLogin(login: string): Promise<UserI>;
-    getUserInfoByToken(token: string): Promise<UserI>;
-    getUserList(arg: SimpleI.listArg): Promise<UserI[]>;
-    insert(data: UserI): Promise<UserI>;
-    update(data: UserI): Promise<boolean>;
-    remove(data: UserI): Promise<boolean>;
-    registerByLoginAndPass(login: string, pass: string): Promise<string>;
-    getTokenByLoginAndPass(login: string, pass: string): Promise<string>;
+    faGetInfoById(userId: number): Promise<UserI>;
+    faGetInfoByLogin(sLogin: string): Promise<UserI>;
+    faGetUserInfoByToken(sToken: string): Promise<UserI>;
+    faGetUserList(arg: SimpleI.listArg): Promise<UserI[]>;
+    faInsert(data: UserI): Promise<UserI>;
+    faUpdate(data: UserI): Promise<boolean>;
+    faRemove(data: UserI): Promise<boolean>;
+    faRegisterByLoginAndPass(sLogin: string, sPass: string): Promise<string>;
+    faGetTokenByLoginAndPass(sLogin: string, sPass: string): Promise<string>;
 }

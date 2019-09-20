@@ -9,7 +9,7 @@ export class InfoA extends BaseActions {
     public object: File;
 
     /**
-     * Получить юзера по ID
+     * Получить файл по ID
      * @param fileId 
      */
     public async faGetInfoById(fileId: number): Promise<boolean> {
