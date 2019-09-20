@@ -42,6 +42,17 @@ TypeScript классы для frontend и backend
     - WalletListA
     - WalletModifyA
 
+# File - работа с файлами
+- File
+- FileR
+- FileDB
+    - FileDB
+    - FileE
+    - FileI
+- FileActions
+    - FileInfoA
+    - FileModifyA
+
 
 
 
