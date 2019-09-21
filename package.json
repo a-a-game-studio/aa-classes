@@ -1,6 +1,6 @@
 {
   "name": "@a-a-game-studio/aa-classes",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "ts classes for backend and frontend",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
