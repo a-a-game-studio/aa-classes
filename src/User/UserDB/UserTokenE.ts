@@ -15,7 +15,7 @@ export interface UserTokenI {
 
 export class UserTokenE {
     //Имя таблицы
-    public static NAME = 'user_token';
+    public static NAME = 'aa_user_token';
 
 
     /**

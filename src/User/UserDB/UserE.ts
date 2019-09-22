@@ -25,7 +25,7 @@ export interface UserI extends AABaseDataI {
 
 export class UserE {
     //Имя таблицы
-    public static NAME = 'users';
+    public static NAME = 'aa_user';
 
 
     /**
