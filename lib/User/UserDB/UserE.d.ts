@@ -11,7 +11,7 @@ export interface UserI extends AABaseDataI {
     birthday?: string;
     avatar?: string;
     city?: string;
-    pass?: string;
+    pswd?: string;
     login?: string;
     token?: string;
     hash?: string;

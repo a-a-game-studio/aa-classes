@@ -25,8 +25,8 @@ export interface getInfoByUrlRESP {
 
 export interface registerByLoginAndPassREQ {
     login?: string;
-    pass?: string;
-    passConfirm?: string
+    pswd?: string;
+    pswdConfirm?: string
 }
 
 export interface registerByLoginAndPassRESP {

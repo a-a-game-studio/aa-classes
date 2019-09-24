@@ -35,8 +35,8 @@ export class RegisterA extends BaseActions {
     /**
      * Регистрация по логину и паролю
      * @param login 
-     * @param pass 
-     * @param passConfirm 
+     * @param pswd 
+     * @param pswdConfirm 
      * 
      * @returns token: string
      */
@@ -54,18 +54,18 @@ export class RegisterA extends BaseActions {
             .fMinLen(5)
 
             /* проверяем пароль */
-            .fSetData(data.pass)
-            .fSetErrorString(errorString + '.pass')
+            .fSetData(data.pswd)
+            .fSetErrorString(errorString + '.pswd')
             .fExist()
             .fText()
             .fMinLen(7)
 
             /* проверяем подтверждение пароля */
-            .fSetData(data.passConfirm)
-            .fSetErrorString(errorString + '.passConfirm')
+            .fSetData(data.pswdConfirm)
+            .fSetErrorString(errorString + '.pswdConfirm')
             .fExist()
             .fText()
-            .fEqual(data.pass)
+            .fEqual(data.pswd)
             .fMinLen(7)
             
             .fSetErrorString('getInfoByLogin');
@@ -81,7 +81,7 @@ export class RegisterA extends BaseActions {
         /* регистрируем пользователя если все OK */
         fv.fSetErrorString('regDB');
         res = await fv.faDoIfOkAsync(
-            async () => await this.object.listDB.userDB.faRegisterByLoginAndPass(data.login, data.pass)
+            async () => await this.object.listDB.userDB.faRegisterByLoginAndPass(data.login, data.pswd)
         );
 
         return res;

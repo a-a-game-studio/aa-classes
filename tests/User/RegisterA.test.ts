@@ -19,8 +19,8 @@ async function run() {
 
             let regData: registerByLoginAndPassREQ = {
                 login: 'user',
-                pass: 'strier',
-                passConfirm: 'stringuser'
+                pswd: 'strier',
+                pswdConfirm: 'stringuser'
             }
             let data = await user.actions.registerA.faRegisterByLoginAndPass(regData);
 
@@ -37,8 +37,8 @@ async function run() {
 
             let regData: registerByLoginAndPassREQ = {
                 login: 'useruser',
-                pass: 'strieruser',
-                passConfirm: 'strieruser'
+                pswd: 'strieruser',
+                pswdConfirm: 'strieruser'
             }
             let data = await user.actions.registerA.faRegisterByLoginAndPass(regData);
 

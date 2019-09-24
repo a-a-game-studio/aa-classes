@@ -4,7 +4,7 @@ import { User } from "../User";
 
 export interface LoginI {
   login?: string;
-  pass?: string;
+  pswd?: string;
 }
 
 /**
@@ -17,13 +17,13 @@ export class AuthA extends BaseActions {
   /**
     * Проверка на авторизацию
     * @param login 
-    * @param pass 
+    * @param pswd 
     * 
     * @returns token
     */
   public async login(data: LoginI): Promise<string> {
     let res: string = '';
-    res = await this.object.listDB.userDB.faGetTokenByLoginAndPass(data.login, data.pass);
+    res = await this.object.listDB.userDB.faGetTokenByLoginAndPass(data.login, data.pswd);
     if (!res) {
       this.object.errorSys.error('cantLogin', 'cantLogin')
     }

@@ -13,7 +13,7 @@ export interface UserI extends AABaseDataI {
     birthday?: string;
     avatar?: string;
     city?: string;
-    pass?: string;
+    pswd?: string;
     login?: string;
     token?: string;
     hash?: string;
@@ -65,10 +65,10 @@ export class UserE {
                 .error(UserE.NAME + ' - hash')
             );
 
-            rules.set(rules.rule('pass')
+            rules.set(rules.rule('pswd')
                 .typeText()
                 .require()
-                .error(UserE.NAME + ' - pass')
+                .error(UserE.NAME + ' - pswd')
             );
 
             rules.set(rules.rule('email')

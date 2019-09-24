@@ -51,7 +51,7 @@ export class User extends AABase {
             birthday: '',
             avatar: '',
             city: '',
-            pass: '',
+            pswd: '',
             login: '',
             token: ''
         }
